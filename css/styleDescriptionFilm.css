@@ -20,15 +20,3 @@ header div h1 {
 header div h2 {
   font-size: 15px;
 }
-
-/* Taille de la liste des films */
-.tailleListeFilms {
-  width: 85%;
-  height: 100%;
-}
-
-/* Taille de l'image du test */
-.tailleImageTest {
-  width: 100%;
-  height: 100%;
-}
