@@ -18,6 +18,8 @@ let dateDans7Jours = String(dateAujourdHui.getDate() + 7).padStart(2, '0') + '/'
 
 console.log(dateDans7Jours);
 
+// let vraiIDfilm = 0;
+
 const options = {
     method: 'GET',
     headers: {
@@ -26,17 +28,35 @@ const options = {
     }
 };
 
-fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=${dateAujourdHui}&release_date.lte=${dateDans7Jours}/${apiKey}`, options)
-    .then((res) => {
-        return res.json();
-    })
-    .then((json) => {
-        // Test de l'affichage du JSON ! C'est bon !!!! :) :) :) :)
-        console.log(json);
+// Fonction pour voir les informations sur le film en question
+// function voirInformationsFilm(idFilm) {
+//     // idFilm = vraiIDfilm;
+//     fetch(`https://api.themoviedb.org/3/movie/${idFilm}?language=fr-FR/${apiKey}`, options)
+//         .then((res) => {
+//             return res.json();
+//         })
+//         .then((json) => {
+//             // Test de l'affichage du JSON ! C'est bon !!!! :) :) :) :)
+//             console.log(json);
 
-        // Vrai affichage des données
-        for (let i = 0; i < json.results.length; i++) {
-            document.getElementById("listeFilms").innerHTML += `
+//             // Vrai affichage des données
+//             // document.getElementById("nomFilm").innerText = json;
+//         })
+//         .catch(err => console.error(err));
+// }
+
+function afficherListeFilmsSemaine() {
+    fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=${dateAujourdHui}&release_date.lte=${dateDans7Jours}/${apiKey}`, options)
+        .then((res) => {
+            return res.json();
+        })
+        .then((json) => {
+            // Test de l'affichage du JSON ! C'est bon !!!! :) :) :) :)
+            console.log(json);
+
+            // Vrai affichage des données
+            for (let i = 0; i < json.results.length; i++) {
+                document.getElementById("listeFilms").innerHTML += `
             <div class="mb-5">
                 <div class="d-flex justify-content-center">
                     <p id="nom-film"><b>${json.results[i].original_title}</b></p>
@@ -54,12 +74,14 @@ fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_v
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button class="btn bg-primary text-white">Voir les informations</button>
+                            <button class="btn bg-primary text-white" onclick="window.location.href = 'descriptionFilm.html?id=${json.results[i].id}'; >Voir les informations</button>
                         </div>
                     </div>
                 </div>
             </div>
         `;
-        }
-    })
-    .catch(err => console.error(err));
+            }
+        })
+        .catch(err => console.error(err));
+}
+afficherListeFilmsSemaine();
