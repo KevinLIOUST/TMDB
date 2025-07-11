@@ -40,14 +40,12 @@ function afficherListeFilmsSemaine() {
             // Vrai affichage des données
             for (let i = 0; i < json.results.length; i++) {
                 document.getElementById("listeFilms").innerHTML += `
-            <div class="mb-5">
-                <div class="d-flex justify-content-center">
-                    <p id="nom-film"><b>${json.results[i].original_title}</b></p>
-                </div>
-                <img id="img-film" class="tailleImageTest mb-4" src="https://media.themoviedb.org/t/p/w220_and_h330_face/${json.results[i].poster_path}"
+            <div class="mb-5 mx-4 ms-4">
+                <p class="nomFilm" id="nom-film"><b>${json.results[i].original_title}</b></p>
+                <img id="img-film" class="tailleImageTest mb-3" src="https://media.themoviedb.org/t/p/w220_and_h330_face/${json.results[i].poster_path}"
                     alt="${json.results[i].poster_path}">
                 <div class="container text-center">
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col">
                             <p id="note-film"><i class="bi bi-star-fill">Avis : </i>${json.results[i].vote_average.toFixed(1)} /10</p>
                         </div>
@@ -57,7 +55,7 @@ function afficherListeFilmsSemaine() {
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button class="btn bg-primary text-white" onclick="window.location.href = 'descriptionFilm.html?id=${json.results[i].id}';" >Voir les informations</button>
+                            <button class="btn bg-primary text-white mb-5" onclick="window.location.href = 'descriptionFilm.html?id=${json.results[i].id}';" >Voir les informations</button>
                         </div>
                     </div>
                 </div>
