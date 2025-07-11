@@ -1,22 +1,14 @@
 // Ma clé d'API
 let apiKey = "9b8f522efb6085d6ee17d3eecaf4b954";
 
-// Affichage de la date d'aujourd'hui dans la console
+let url = `https://api.themoviedb.org/3/movie/id`;
 
-// On déclare un objet date pour s'en servir pour trouver la date actuelle.
-let dateAujourdHui = new Date();
+let urlParams = new URLSearchParams(window.location.search);
 
-// On utilise la méthode padStart avec 2 en premier paramètre pour afficher deux chiffres avant le "/"
-let output = String(dateAujourdHui.getDate()).padStart(2, '0') + '/' +
-    String(dateAujourdHui.getMonth() + 1).padStart(2, '0') + '/' + dateAujourdHui.getFullYear();
+let id = urlParams.get('id');
+console.log(id);
 
-// Affichage dans la console
-console.log(output);
-
-let dateDans7Jours = String(dateAujourdHui.getDate() + 7).padStart(2, '0') + '/' +
-    String(dateAujourdHui.getMonth() + 1).padStart(2, '0') + '/' + dateAujourdHui.getFullYear();
-
-console.log(dateDans7Jours);
+let newUrl = `https://api.themoviedb.org/3/movie/${id}?language=fr-FR`;
 
 const options = {
     method: 'GET',
@@ -26,12 +18,22 @@ const options = {
     }
 };
 
-fetch(`https://api.themoviedb.org/3/movie/${idFilm}?language=fr-FR/${apiKey}`, options)
+fetch(newUrl, options)
     .then((res) => {
         return res.json();
     })
     .then((json) => {
         // Test de l'affichage du JSON ! C'est bon !!!! :) :) :) :)
         console.log(json);
+
+        // Affichage des données
+        document.getElementById("nomFilm").innerText = json.original_title;
+
+        document.getElementById("imgFilm").innerHTML = `<img class="mb-3" src="https://image.tmdb.org/t/p/w300${json.poster_path}" alt="${json.poster_path}">`;
+
+        document.getElementById("noteFilm").innerHTML = `<p><i class="bi bi-star-fill">Avis : </i>${json.vote_average.toFixed(1)} /10</p>`;
+        document.getElementById("dateFilm").innerText = `Date de sortie :\n ${json.release_date}`;
+
+        document.getElementById("descriptionFilm").innerText = json.overview;
     })
     .catch(err => console.error(err));

@@ -28,23 +28,6 @@ const options = {
     }
 };
 
-// Fonction pour voir les informations sur le film en question
-// function voirInformationsFilm(idFilm) {
-//     // idFilm = vraiIDfilm;
-//     fetch(`https://api.themoviedb.org/3/movie/${idFilm}?language=fr-FR/${apiKey}`, options)
-//         .then((res) => {
-//             return res.json();
-//         })
-//         .then((json) => {
-//             // Test de l'affichage du JSON ! C'est bon !!!! :) :) :) :)
-//             console.log(json);
-
-//             // Vrai affichage des données
-//             // document.getElementById("nomFilm").innerText = json;
-//         })
-//         .catch(err => console.error(err));
-// }
-
 function afficherListeFilmsSemaine() {
     fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=${dateAujourdHui}&release_date.lte=${dateDans7Jours}/${apiKey}`, options)
         .then((res) => {
@@ -74,7 +57,7 @@ function afficherListeFilmsSemaine() {
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button class="btn bg-primary text-white" onclick="window.location.href = 'descriptionFilm.html?id=${json.results[i].id}'; >Voir les informations</button>
+                            <button class="btn bg-primary text-white" onclick="window.location.href = 'descriptionFilm.html?id=${json.results[i].id}';" >Voir les informations</button>
                         </div>
                     </div>
                 </div>
