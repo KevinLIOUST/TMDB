@@ -20,3 +20,28 @@ header div h1 {
 header div h2 {
   font-size: 15px;
 }
+
+.tailleImageTest {
+  width: 90%;
+  height: auto;
+  border: 3px solid rgb(0, 183, 255);
+  border-radius: 8px;
+}
+
+/* Media Query pour la version desktop */
+@media screen and (min-width: 1920px) {
+  header div h1 {
+    font-size: 75px;
+  }
+
+  header div h2 {
+    font-size: 45px;
+  }
+
+  .tailleImageTest {
+    width: 45%;
+    height: auto;
+    border-radius: 8px;
+    border: 3px solid rgb(0, 183, 255);
+  }
+}

@@ -37,7 +37,24 @@ header div h2 {
 /* Taille de l'image du test */
 .tailleImageTest {
   width: 100%;
-  height: 100%;
+  height: auto;
+  border: 3px solid rgb(0, 183, 255);
+  border-radius: 8px;
+}
+
+.searchBar {
+  width: 45%;
+  border-radius: 8px;
+  background-color: rgb(193, 218, 218);
+}
+
+.icon-search {
+  border-radius: 8px;
+  background-color: rgb(65, 136, 237);
+}
+
+.colorBtnRechercher {
+  background-color: rgb(132, 196, 196);
 }
 
 /* Media Query pour la version desktop */

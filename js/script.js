@@ -29,7 +29,7 @@ const options = {
 };
 
 function afficherListeFilmsSemaine() {
-    fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=${dateAujourdHui}&release_date.lte=${dateDans7Jours}/${apiKey}`, options)
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&page=1`, options)
         .then((res) => {
             return res.json();
         })
@@ -42,7 +42,7 @@ function afficherListeFilmsSemaine() {
                 document.getElementById("listeFilms").innerHTML += `
             <div class="mb-5 mx-4 ms-4">
                 <p class="nomFilm" id="nom-film"><b>${json.results[i].original_title}</b></p>
-                <img id="img-film" class="tailleImageTest mb-3" src="https://media.themoviedb.org/t/p/w220_and_h330_face/${json.results[i].poster_path}"
+                <img id="img-film" class="tailleImageTest mb-3" src="https://media.themoviedb.org/t/p/w500${json.results[i].poster_path}"
                     alt="${json.results[i].poster_path}">
                 <div class="container text-center">
                     <div class="row mb-2">
@@ -65,4 +65,57 @@ function afficherListeFilmsSemaine() {
         })
         .catch(err => console.error(err));
 }
-afficherListeFilmsSemaine();
+
+let url = `https://api.themoviedb.org/3/search/movie`;
+
+let urlParams = new URLSearchParams(window.location.search);
+
+let movie = urlParams.get('search');
+console.log(movie);
+
+let newUrl = `https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=fr-FR`;
+
+function rechercherFilm() {
+    // https://api.themoviedb.org/3/search/movie?query=Fairy%20tail&include_adult=false&language=fr-FR&page=1
+    fetch(newUrl, options)
+        .then((res) => {
+            return res.json();
+        })
+        .then((json) => {
+            console.log(json);
+
+            document.getElementById("listeFilms").innerHTML = ``;
+
+            for (let i = 0; i < json.results.length; i++) {
+                document.getElementById("listeFilms").innerHTML += `
+            <div class="mb-5 mx-4 ms-4">
+                <p class="nomFilm" id="nom-film"><b>${json.results[i].original_title}</b></p>
+                <img id="img-film" class="tailleImageTest mb-3" src="https://media.themoviedb.org/t/p/w500${json.results[i].poster_path}"
+                    alt="${json.results[i].poster_path}">
+                <div class="container text-center">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <p id="note-film"><i class="bi bi-star-fill">Avis : </i>${json.results[i].vote_average.toFixed(1)} /10</p>
+                        </div>
+                        <div class="col">
+                            <p id="date-film">Date de sortie : ${json.results[i].release_date}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn bg-primary text-white mb-5" onclick="window.location.href = 'descriptionFilm.html?id=${json.results[i].id}';" >Voir les informations</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+            }
+        })
+}
+
+if (movie == "") {
+    document.getElementById("listeFilms").innerHTML = ``;
+    afficherListeFilmsSemaine();
+} else {
+    rechercherFilm();
+}

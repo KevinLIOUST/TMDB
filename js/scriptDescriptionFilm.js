@@ -29,7 +29,7 @@ fetch(newUrl, options)
         // Affichage des données
         document.getElementById("nomFilm").innerText = json.original_title;
 
-        document.getElementById("imgFilm").innerHTML = `<img class="mb-3" src="https://image.tmdb.org/t/p/w300${json.poster_path}" alt="${json.poster_path}">`;
+        document.getElementById("imgFilm").innerHTML = `<img class="tailleImageTest mb-3" src="https://image.tmdb.org/t/p/w500${json.poster_path}" alt="${json.poster_path}">`;
 
         document.getElementById("noteFilm").innerHTML = `<p><i class="bi bi-star-fill">Avis : </i>${json.vote_average.toFixed(1)} /10</p>`;
         document.getElementById("dateFilm").innerText = `Date de sortie :\n ${json.release_date}`;
