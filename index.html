@@ -22,11 +22,9 @@
 
 <body>
     <header>
-        <div class="d-flex justify-content-center">
-            <h1>Liste des films de la semaine</h1>
-        </div>
-        <div class="d-flex justify-content-center mb-5">
-            <h2>Voici la liste des films du moment !</h2>
+        <div id="nom-Page" class="mb-5">
+            <h1 class="text-center">Liste des films de la semaine</h1>
+            <h2 class="text-center">Voici la liste des films du moment !</h2>
         </div>
         <div class="d-flex justify-content-center mb-5">
             <div class="w-100 d-flex justify-content-center">
@@ -34,6 +32,13 @@
                     <input class="searchBar mx-3" id="search" type="search" placeholder="Rechercher un Film..."
                         name="search">
                     <button class="btn colorBtnRechercher">Rechercher</button>
+                    <select class="select mx-3" name="select" id="select-Language">
+                        <option value="fr-FR">fr-FR</option>
+                        <option value="en-EN">en-EN</option>
+                        <option value="jp-JP">jp-JP</option>
+                        <option value="es-ES">es-ES</option>
+                        <option value="de-DE">de-DE</option>
+                    </select>
                 </form>
             </div>
         </div>

@@ -84,6 +84,11 @@ function rechercherFilm() {
         .then((json) => {
             console.log(json);
 
+            document.getElementById("nom-Page").innerHTML = `
+            <h1 class="text-center">Voici les résultats de recherche pour</h1>
+            <h2 class="text-center">${movie}</h2>
+            `;
+
             document.getElementById("listeFilms").innerHTML = ``;
 
             for (let i = 0; i < json.results.length; i++) {
@@ -113,7 +118,7 @@ function rechercherFilm() {
         })
 }
 
-if (movie == "") {
+if (movie == "" || movie === null) {
     document.getElementById("listeFilms").innerHTML = ``;
     afficherListeFilmsSemaine();
 } else {
